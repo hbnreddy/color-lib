@@ -43,4 +43,4 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: deploy war to tomact
-      shell: curl -v -u tomcat:tomcat -T  /home/runner/work/color-lib/color-lib/target/app.war 'http://localhost:8080//manager/text/deploy?path=/mywar'
+      run: curl -v -u tomcat:tomcat -T  /home/runner/work/color-lib/color-lib/target/app.war 'http://localhost:8080//manager/text/deploy?path=/mywar'
