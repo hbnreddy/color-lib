@@ -4,8 +4,8 @@
 name: Java CI with Maven
 
 on:
-  #push:
-  #branches: [ master ]
+  push:
+    branches: [ develop ]
   pull_request:
     branches: [ develop ]
 
@@ -30,5 +30,12 @@ jobs:
         name: mywar
         path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
         if-no-files-found: error
-
         
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        repository: ${{ github.repository }}
+
+    - name: build project
+      if: github.event_name == 'push'
+      run: mvn -B package --file pom.xml     
