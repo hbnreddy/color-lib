@@ -28,7 +28,8 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: mywar
-        path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
+        path: /home/runner/work/color-lib/color-lib/target/app.war  
+          # path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
         if-no-files-found: error
         
     - name: checkout
@@ -41,4 +42,5 @@ jobs:
       if: github.event_name == 'push'
       run: mvn -B package --file pom.xml
 
-       
+    - name: deploy war to tomact
+      shell: curl -v -u tomcat:tomcat -T  /home/runner/work/color-lib/color-lib/target/app.war 'http://localhost:8080//manager/text/deploy?path=/mywar'
