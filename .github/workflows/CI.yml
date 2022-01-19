@@ -29,4 +29,6 @@ jobs:
       with:
         name: mywar
         path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
-        if-no-files-found: error      
+        if-no-files-found: error
+
+        
