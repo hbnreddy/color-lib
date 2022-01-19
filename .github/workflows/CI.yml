@@ -28,32 +28,32 @@ jobs:
             }' \
           --fail
     
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: mywar
-        path: /home/runner/work/color-lib/color-lib/target/app.war  
-          # path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
-        if-no-files-found: error
+      - uses: actions/upload-artifact@v2
+        with:
+          name: mywar
+          path: /home/runner/work/color-lib/color-lib/target/app.war  
+           # path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
+          if-no-files-found: error
         
-    - name: checkout
-      if: github.event_name == 'push'
-      uses: actions/checkout@v2
-      with:
-        repository: ${{ github.repository }}
+      - name: checkout
+        if: github.event_name == 'push'
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}
 
-    - name: build project
-      if: github.event_name == 'push'
-      run: mvn -B package --file pom.xml
+      - name: build project
+        if: github.event_name == 'push'
+        run: mvn -B package --file pom.xml
 
-    - name: deploy war to tomact
-      run: curl -v -u tomcat:tomcat -T  /home/runner/work/color-lib/color-lib/target/app.war 'ubuntu@3.19.232.109:/home/ubuntu/tomcat9/webapps'
+      - name: deploy war to tomact
+        run: curl -v -u tomcat:tomcat -T  /home/runner/work/color-lib/color-lib/target/app.war 'ubuntu@3.19.232.109:/home/ubuntu/tomcat9/webapps'
