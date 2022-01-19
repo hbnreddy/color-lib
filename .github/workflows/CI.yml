@@ -39,4 +39,10 @@ jobs:
 
     - name: build project
       if: github.event_name == 'push'
-      run: mvn -B package --file pom.xml     
+      run: mvn -B package --file pom.xml
+
+    - name: Pull Request Workflow Cancel
+      uses: Khan/pull-request-workflow-cancel@fda608931bf2730dadb1bcbffa721d45bf2023cf
+      uses: Khan/pull-request-workflow-cancel@1.0.0
+      with:
+       workflows:     
