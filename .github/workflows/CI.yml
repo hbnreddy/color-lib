@@ -24,3 +24,9 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: mywar
+        path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
+        if-no-files-found: error      
