@@ -59,7 +59,7 @@ jobs:
         if: github.event_name == 'push'
         uses: siva1024/scp-deployer@v1.0
         with:
-          host: ${{ secrets.MY_HOST }}
+          host: ${{secrets.MY_HOST}}
           username: ${{ secrets.CLOUD_UNAME }}
           key: ${{ secrets.SSH_TOKEN }}
           password: ${{ secrets.CLOUD_PASSWD }} 
