@@ -56,4 +56,13 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: deploy war to tomact
-        run: curl -v -u tomcat:tomcat -T  /home/runner/work/color-lib/color-lib/target/app.war 'ubuntu@3.19.232.109:/home/ubuntu/tomcat9/webapps'
+        if: github.event_name == 'push'
+        uses: siva1024/scp-deployer@v1.0
+        with:
+          host: ${{ secrets.MY_HOST }}
+          username: ${{ secrets.CLOUD_UNAME }}
+          key: ${{ secrets.SSH_TOKEN }}
+          password: ${{ secrets.CLOUD_PASSWD }} 
+          source: ${{ secrets.CLOUD_PAS }}
+          target: ${{ secrets.CLOUD_PASSWD }}
+
