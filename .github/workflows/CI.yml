@@ -58,7 +58,7 @@ jobs:
       - name: deploy war to tomact
         if: github.event_name == 'push'
         uses: appleboy/scp-action@v0.0.1
-          with:
+        with:
           host: ${{ secrets.MY_HOST }}
           username: ${{ secrets.CLOUD_UNAME }}
           key: ${{ secrets.SSH_TOKEN }}
