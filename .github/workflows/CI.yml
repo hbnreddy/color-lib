@@ -50,7 +50,7 @@ jobs:
 
       - name: upload Artifacts
         if: github.event_name == 'push'
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: apps.war
           path: /home/runner/work/color-lib/color-lib/target/app.war
