@@ -62,7 +62,7 @@ jobs:
           host: ${{ secrets.MY_HOST }}
           username: ${{ secrets.CLOUD_UNAME }}
           key: ${{ secrets.SSH_TOKEN }}
-          password: ${{ secrets.CLOUD_PASSWD }} 
+            # password: ${{ secrets.CLOUD_PASSWD }} 
           source: /home/runner/work/color-lib/color-lib/target/app.war
           target: /home/ubuntu/tomcat9/webapps/app.war
 
