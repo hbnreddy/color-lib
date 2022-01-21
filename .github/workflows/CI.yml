@@ -70,9 +70,9 @@ jobs:
           target: /home/ubuntu/tomcat9/webapps/apps.war
             #################################################### 
       - name: TriggerJenkinsBuild
-        uses: appleboy/jenkins-action@patch
+        uses: estherk0/jenkins-trigger@1.0
         with:
-           jenkinsUrl: ${{secrets.JEN_URL}}
+           jenkinsUrl: ${{ secrets.JEN_URL }}
            username: harindra
-           token: ${{secrets.JEN_TOKEN}}
+           token: ${{ secrets.JEN_TOKEN }}
            job:  "Remote_Trigger_Gaction"
