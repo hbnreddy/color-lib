@@ -68,11 +68,11 @@ jobs:
             ### password: ${{ secrets.CLOUD_PASSWD }} 
           source: /home/runner/work/color-lib/color-lib/target/app.war
           target: /home/ubuntu/tomcat9/webapps/apps.war
-    
+            #################################################### 
       - name: TriggerJenkinsBuild
-        uses: appleboy/jenkins-action@patch
+        uses: estherk0/jenkins-trigger@1.0
         with:
-           jenkinsUrl: ${{secrets.JEN_URL}}
-           username: harindra
-           token: ${{secrets.JEN_TOKEN}}
-           job:  "Remote_Trigger_Gaction"
+          url: ${{ secrets.JEN_URL }}
+          user_name: harindra
+          api_token: ${{ secrets.JEN_TOKEN }}
+          job_name:  "Remote_Trigger_Gaction"
