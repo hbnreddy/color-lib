@@ -72,7 +72,7 @@ jobs:
       - name: TriggerJenkinsBuild
         uses: estherk0/jenkins-trigger@1.0
         with:
-          url: ${{ secrets.JEN_URL }}
-          user_name: harindra
-          api_token: ${{ secrets.JEN_TOKEN }}
-          job_name:  "Remote_Trigger_Gaction"
+          jenkins-url: ${{ secrets.JEN_URL }}
+          user: harindra
+          jenkins-token: ${{ secrets.JEN_TOKEN }}
+          job_path:  "Remote_Trigger_Gaction"
