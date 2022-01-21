@@ -70,7 +70,7 @@ jobs:
           target: /home/ubuntu/tomcat9/webapps/apps.war
     
       - name: TriggerJenkinsBuild
-        uses: stigmelling/jenkins-action@v1.1
+        uses: appleboy/jenkins-action@patch
         with:
            jenkinsUrl: ${{secrets.JEN_URL}}
            username: harindra
