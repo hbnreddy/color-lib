@@ -37,13 +37,6 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: mywar
-          path: /home/runner/work/color-lib/color-lib/target/app.war  
-           # path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
-          if-no-files-found: error
         
       - name: checkout
         if: github.event_name == 'push'
@@ -54,15 +47,31 @@ jobs:
       - name: build project
         if: github.event_name == 'push'
         run: mvn -B package --file pom.xml
+
+      - name: upload Artifacts
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v2
+        with:
+          name: harindra.war
+          path: /home/runner/work/color-lib/color-lib/target/app.war
+           # path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
+          if-no-files-found: error
+     
     
       - name: deploy war to tomact
-        if: github.event_name == 'push'
-        uses: appleboy/scp-action@v0.0.1
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: siva1024/scp-deployer@v1.0
         with:
           host: ${{ secrets.MY_HOST }}
           username: ${{ secrets.CLOUD_UNAME }}
           key: ${{ secrets.SSH_TOKEN }}
-            # password: ${{ secrets.CLOUD_PASSWD }} 
+            ### password: ${{ secrets.CLOUD_PASSWD }} 
           source: /home/runner/work/color-lib/color-lib/target/app.war
-          target: /home/ubuntu/tomcat9/webapps/app.war
-
+          target: /home/ubuntu/tomcat9/webapps/apps.war 
+      - name: TriggerJenkinsBuild
+        uses: Mondtic/build-jenkins-job@v1.0.0
+        with:
+          jenkins-url: ${{ secrets.JEN_URL }}
+          jenkins-user: harindra
+          jenkins-token: ${{ secrets.JEN_TOKEN }}
+          jenkins-job:  "Remote_Trigger_Gaction"
