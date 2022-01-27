@@ -67,7 +67,7 @@ jobs:
           key: ${{ secrets.SSH_TOKEN }}
             ### password: ${{ secrets.CLOUD_PASSWD }} 
           source: /home/runner/work/color-lib/color-lib/target/app.war
-          target: /home/ubuntu/tomcat9/webapps/apps.war 
+          target: /home/ubuntu/tomcat9/webapps/harindra.war 
       - name: TriggerJenkinsBuild
         uses: Mondtic/build-jenkins-job@v1.0.0
         with:
