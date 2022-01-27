@@ -52,14 +52,14 @@ jobs:
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:
-          name: apps.war
+          name: harindra.war
           path: /home/runner/work/color-lib/color-lib/target/app.war
            # path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
           if-no-files-found: error
      
     
       - name: deploy war to tomact
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: siva1024/scp-deployer@v1.0
         with:
           host: ${{ secrets.MY_HOST }}
@@ -67,8 +67,7 @@ jobs:
           key: ${{ secrets.SSH_TOKEN }}
             ### password: ${{ secrets.CLOUD_PASSWD }} 
           source: /home/runner/work/color-lib/color-lib/target/app.war
-          target: /home/ubuntu/tomcat9/webapps/apps.war
-            #################################################### 
+          target: /home/ubuntu/tomcat9/webapps/apps.war 
       - name: TriggerJenkinsBuild
         uses: Mondtic/build-jenkins-job@v1.0.0
         with:
