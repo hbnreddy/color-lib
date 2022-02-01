@@ -8,7 +8,7 @@ on:
     branches: [ develop, master ]
   pull_request:
     branches: [ develop ]
-
+      ##################################################################################################
 jobs:
   build:
     # self-hosted
@@ -56,8 +56,15 @@ jobs:
           path: /home/runner/work/color-lib/color-lib/target/app.war
            # path: /home/ubuntu/actions-runner/_work/color-lib/color-lib/target/app.war
           if-no-files-found: error
+
+      - name: TriggerJenkinsBuild
+        uses: Mondtic/build-jenkins-job@v1.0.0
+        with:
+          jenkins-url: ${{ secrets.JEN_URL }}
+          jenkins-user: harindra
+          jenkins-token: ${{ secrets.JEN_TOKEN }}
+          jenkins-job:  "Remote_Trigger_Gaction"
      
-    
       - name: deploy war to tomact
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: siva1024/scp-deployer@v1.0
@@ -68,10 +75,3 @@ jobs:
             ### password: ${{ secrets.CLOUD_PASSWD }} 
           source: /home/runner/work/color-lib/color-lib/target/app.war
           target: /home/ubuntu/tomcat9/webapps/harindra.war 
-      - name: TriggerJenkinsBuild
-        uses: Mondtic/build-jenkins-job@v1.0.0
-        with:
-          jenkins-url: ${{ secrets.JEN_URL }}
-          jenkins-user: harindra
-          jenkins-token: ${{ secrets.JEN_TOKEN }}
-          jenkins-job:  "Remote_Trigger_Gaction"
