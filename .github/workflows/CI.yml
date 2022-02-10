@@ -64,6 +64,8 @@ jobs:
           jenkins-user: harindra
           jenkins-token: ${{ secrets.JEN_TOKEN }}
           jenkins-job:  "Remote_Trigger_Gaction"
+
+            #############modified######
      
       - name: deploy war to tomact
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
